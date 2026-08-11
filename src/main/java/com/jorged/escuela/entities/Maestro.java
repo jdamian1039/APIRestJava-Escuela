@@ -55,7 +55,7 @@ public class Maestro {
                 "telefono requerido debe tener entre 10 y 10 caracteres");
     }
 
-    public void actualizarAlumno(String nombre, String apellidoPaterno, String apellidoMaterno, String email,
+    public void actualizar(String nombre, String apellidoPaterno, String apellidoMaterno, String email,
                                  String telefono) {
 
         validarDatos(nombre, apellidoPaterno, apellidoMaterno, email, telefono);
