@@ -73,6 +73,13 @@ public class GlobalExceptionHandler {
                 .body(new CustomErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
     }
 
+    @ExceptionHandler(EntidadRelacionadaException.class)
+    public ResponseEntity<CustomErrorResponse> handleEntidadRelacionadaException(EntidadRelacionadaException e) {
+        log.warn("Error al eliminar un recurso: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new CustomErrorResponse(HttpStatus.CONFLICT.value(), e.getMessage()));
+    }
+
     //Exception debe ir al final siempre
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CustomErrorResponse> handleGeneralException(Exception e) {
