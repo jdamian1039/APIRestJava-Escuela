@@ -32,4 +32,13 @@ public class Calificacion {
     @Builder.Default
     @Column (name="FECHA_REGISTRO", nullable = false)
     private LocalDate fechaRegistro = LocalDate.now();
+
+    public void actualizarCalificacion(Inscripcion inscripcion, BigDecimal calificacion, LocalDate fechaRegistro) {
+        this.inscripcion = inscripcion;
+        this.calificacion = calificacion;
+        this.fechaRegistro = fechaRegistro;
+    }
+    public void asignarObjeto(Inscripcion inscripcion) {
+        this.inscripcion = inscripcion;
+    }
 }
