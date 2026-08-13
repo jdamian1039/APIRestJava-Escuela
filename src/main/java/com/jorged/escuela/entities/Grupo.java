@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "GRUPOS", uniqueConstraints = @UniqueConstraint(name = "GRUPO_CU_MA_AU_PE_UK",
         columnNames = {"ID_CURSO", "ID_MAESTRO", "ID_AULA"}))
@@ -29,4 +32,21 @@ public class Grupo {
     private Aula aula;
     @Column (name="PERIODO", length=20, nullable = false)
     private String periodo;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY)
+    private List<Horario> horarios = new ArrayList<>();
+
+    public void actualizarGrupo(Curso curso, Aula aula, Maestro maestro, String periodo){
+        this.curso = curso;
+        this.aula = aula;
+        this.maestro = maestro;
+        this.periodo = periodo;
+    }
+
+    public void actualizarDatosAnidados(Curso curso, Aula aula, Maestro maestro){
+        this.curso = curso;
+        this.aula = aula;
+        this.maestro = maestro;
+    }
 }

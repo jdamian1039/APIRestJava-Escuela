@@ -1,5 +1,8 @@
 package com.jorged.escuela.entities;
 
+import com.jorged.escuela.dto.inscripciones.InscripcionRequest;
+import com.jorged.escuela.dto.inscripciones.InscripcionResponse;
+import com.jorged.escuela.services.CrudService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +34,16 @@ public class Inscripcion {
     private LocalDate fechaInscripcion = LocalDate.now();
     @OneToOne(mappedBy = "inscripcion")
     private Calificacion calificacion;
+
+    public void actualizarInscripcion(Alumno alumno, Grupo grupo, LocalDate fechaInscripcion, Calificacion calificacion) {
+        this.alumno = alumno;
+        this.grupo = grupo;
+        this.fechaInscripcion = fechaInscripcion;
+        this.calificacion = calificacion;
+    }
+    public void llenarObjetosInscripcion(Alumno alumno, Grupo grupo, Calificacion calificacion) {
+        this.alumno = alumno;
+        this.grupo = grupo;
+        this.calificacion = calificacion;
+    }
 }

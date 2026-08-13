@@ -3,7 +3,9 @@ package com.jorged.escuela.services.maestros;
 import com.jorged.escuela.dto.maestros.MaestroRequest;
 import com.jorged.escuela.dto.maestros.MaestroResponse;
 import com.jorged.escuela.entities.Maestro;
+import com.jorged.escuela.exceptions.EntidadRelacionadaException;
 import com.jorged.escuela.mapper.MaestroMapper;
+import com.jorged.escuela.repositories.GrupoRepository;
 import com.jorged.escuela.repositories.MaestroRepository;
 import com.jorged.escuela.utils.ServiceUtils;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ public class MaestroServiceImp implements MaestroService {
 
     private final MaestroRepository maestroRepository;
     private final MaestroMapper maestroMapper;
+    private final GrupoRepository grupoRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -67,7 +70,11 @@ public class MaestroServiceImp implements MaestroService {
     public void eliminar(Long id) {
         Maestro maestro = obtenerMaestro(id);
 
+        if (grupoRepository.existsByMaestroId(id))
+            throw new EntidadRelacionadaException("Profesor no se puede eliminar, tiene grupos asignados");
+
         maestroRepository.delete(maestro);
+
         log.info("Maestro {} eliminado correctamente", maestro.getNombre());
     }
 

@@ -1,8 +1,10 @@
 package com.jorged.escuela.mapper;
 
 import com.jorged.escuela.dto.datos.DatosCurso;
+import com.jorged.escuela.dto.datos.DatosMaestro;
 import com.jorged.escuela.dto.maestros.MaestroRequest;
 import com.jorged.escuela.dto.maestros.MaestroResponse;
+import com.jorged.escuela.entities.Curso;
 import com.jorged.escuela.entities.Grupo;
 import com.jorged.escuela.entities.Maestro;
 import lombok.AllArgsConstructor;
@@ -53,5 +55,24 @@ public class MaestroMapper implements CommonMapper<MaestroRequest, MaestroRespon
                 .map(Grupo::getCurso)
                 .map(cursoMapper::entidadADatosCurso)
                 .toList();
+    }/*
+    Hola guapo, besos en el me niegas xoxoxo
+    me caes muy bien 7w7
+    Eres muy grande y lindo (¬ 3 ¬)
+    tqm
+    *no homo xd
+    */
+
+    public DatosMaestro entidadADatosMaestro(Maestro entidad) {
+        if (entidad==null) return null;
+
+        return new DatosMaestro(
+                String.join(" ",
+                        entidad.getNombre(), entidad.getApellidoPaterno(), entidad.getApellidoMaterno()),
+                entidad.getEmail(),
+                entidad.getTelefono()
+        );
+
     }
+
 }
